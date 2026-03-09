@@ -1,0 +1,170 @@
+'use client'
+
+// Each "logo" is rendered as styled text since we can't load real brand logos
+const LOGOS = [
+  { name: 'GODREJ',      sub: 'Properties'    },
+  { name: 'TATA',        sub: 'Housing'        },
+  { name: 'MAHINDRA',   sub: 'Lifespaces'     },
+  { name: 'KOLTE',       sub: 'Patil'          },
+  { name: 'BRIGADE',     sub: 'Group'          },
+  { name: 'PRESTIGE',    sub: 'Estates'        },
+  { name: 'DLF',         sub: 'Limited'        },
+  { name: 'OBEROI',      sub: 'Realty'         },
+  { name: 'EMBASSY',     sub: 'Group'          },
+  { name: 'SOBHA',       sub: 'Limited'        },
+  { name: 'LODHA',       sub: 'Developers'     },
+  { name: 'PIRAMAL',     sub: 'Realty'         },
+]
+
+// Doubled for seamless loop
+const ALL = [...LOGOS, ...LOGOS]
+
+export default function TestimonialsSection() {
+  return (
+    <section style={{ background:'#0a0a0a', padding:'6rem 0 5rem', overflow:'hidden', position:'relative' }}>
+
+      {/* Top rule */}
+      <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px',
+        background:'linear-gradient(90deg,transparent,rgba(201,168,76,0.28),transparent)' }}/>
+
+      {/* ── Heading block ── */}
+      <div style={{ maxWidth:'1280px', margin:'0 auto', padding:'0 5rem', marginBottom:'4rem', position:'relative' }}>
+
+        {/* Giant ghost "TRUST" behind */}
+        <div style={{
+          position:'absolute', top:'-2rem', left:'50%', transform:'translateX(-50%)',
+          fontFamily:'Cormorant Garamond,serif',
+          fontSize:'clamp(6rem,12vw,11rem)',
+          fontWeight:300, lineHeight:1,
+          color:'transparent',
+          WebkitTextStroke:'1px rgba(201,168,76,0.055)',
+          letterSpacing:'0.12em',
+          userSelect:'none', pointerEvents:'none',
+          whiteSpace:'nowrap',
+        }}>TRUST</div>
+
+        <div style={{ textAlign:'center', position:'relative', zIndex:1 }}>
+          <p style={{
+            fontFamily:'Jost,sans-serif', fontSize:'0.6rem',
+            letterSpacing:'0.4em', textTransform:'uppercase',
+            color:'var(--gold)', fontWeight:300, marginBottom:'0.85rem',
+          }}>Partners & Associates</p>
+          <h2 style={{
+            fontFamily:'Cormorant Garamond,serif',
+            fontSize:'clamp(1.8rem,3vw,2.6rem)',
+            fontWeight:300, color:'rgba(255,255,255,0.88)',
+          }}>
+            A Legacy of{' '}
+            <span style={{
+              fontStyle:'italic',
+              background:'linear-gradient(135deg,#E2C07A,#C9A84C)',
+              WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text',
+            }}>Trust</span>{' '}
+            &amp; Distinction
+          </h2>
+        </div>
+      </div>
+
+      {/* ── Marquee track ── */}
+      <div style={{ position:'relative', overflow:'hidden' }}>
+        {/* Fade edges */}
+        <div style={{
+          position:'absolute', left:0, top:0, bottom:0, width:'160px', zIndex:2, pointerEvents:'none',
+          background:'linear-gradient(90deg,#0a0a0a 0%,transparent 100%)',
+        }}/>
+        <div style={{
+          position:'absolute', right:0, top:0, bottom:0, width:'160px', zIndex:2, pointerEvents:'none',
+          background:'linear-gradient(-90deg,#0a0a0a 0%,transparent 100%)',
+        }}/>
+
+        {/* Moving row */}
+        <div style={{
+          display:'flex', alignItems:'center', gap:'0',
+          width:'max-content',
+          animation:'marquee 42s linear infinite',
+        }}>
+          {ALL.map((logo, i) => (
+            <div key={i} style={{
+              flexShrink:0,
+              width:'180px', height:'80px',
+              display:'flex', flexDirection:'column',
+              alignItems:'center', justifyContent:'center',
+              border:'1px solid rgba(201,168,76,0.07)',
+              borderRight: 'none',
+              transition:'background 0.3s, border-color 0.3s',
+              cursor:'default',
+            }}
+            onMouseEnter={e=>{
+              const el = e.currentTarget as HTMLElement
+              el.style.background='rgba(201,168,76,0.04)'
+              el.style.borderColor='rgba(201,168,76,0.25)'
+            }}
+            onMouseLeave={e=>{
+              const el = e.currentTarget as HTMLElement
+              el.style.background='transparent'
+              el.style.borderColor='rgba(201,168,76,0.07)'
+            }}
+            >
+              <span style={{
+                fontFamily:'Cormorant Garamond,serif',
+                fontSize:'0.95rem', fontWeight:600,
+                letterSpacing:'0.22em',
+                color:'rgba(255,255,255,0.14)',
+                transition:'color 0.35s',
+                display:'block',
+              }}
+              onMouseEnter={e=>(e.currentTarget as HTMLElement).style.color='rgba(201,168,76,0.65)'}
+              onMouseLeave={e=>(e.currentTarget as HTMLElement).style.color='rgba(255,255,255,0.14)'}
+              >{logo.name}</span>
+              <span style={{
+                fontFamily:'Jost,sans-serif', fontSize:'0.48rem',
+                letterSpacing:'0.28em', textTransform:'uppercase',
+                color:'rgba(255,255,255,0.09)',
+                marginTop:'3px',
+              }}>{logo.sub}</span>
+            </div>
+          ))}
+          {/* Final right border */}
+          <div style={{ width:'1px', height:'80px', background:'rgba(201,168,76,0.07)' }}/>
+        </div>
+      </div>
+
+      {/* ── Testimonial quote ── */}
+      <div style={{ maxWidth:'760px', margin:'4.5rem auto 0', padding:'0 5rem', textAlign:'center' }}>
+        {/* Big open quote */}
+        <div style={{
+          fontFamily:'Cormorant Garamond,serif',
+          fontSize:'5rem', lineHeight:0.8, marginBottom:'1.25rem',
+          color:'transparent', WebkitTextStroke:'1px rgba(201,168,76,0.3)',
+        }}>"</div>
+
+        <p style={{
+          fontFamily:'Cormorant Garamond,serif',
+          fontSize:'clamp(1.1rem,1.8vw,1.5rem)',
+          fontStyle:'italic', fontWeight:300,
+          color:'rgba(255,255,255,0.52)',
+          lineHeight:1.65, marginBottom:'2rem',
+        }}>
+          NBR Realty's execution on our 300-acre mandate was extraordinary. Their market insight and deep network unlocked value we hadn't imagined possible.
+        </p>
+
+        <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'1.25rem' }}>
+          <div style={{ height:'1px', width:'36px', background:'rgba(201,168,76,0.3)' }}/>
+          <div>
+            <p style={{ fontFamily:'Jost,sans-serif', fontSize:'0.68rem', letterSpacing:'0.2em', textTransform:'uppercase', color:'var(--gold)', fontWeight:500 }}>
+              Arvind Mehta
+            </p>
+            <p style={{ fontFamily:'Jost,sans-serif', fontSize:'0.58rem', color:'rgba(255,255,255,0.25)', fontWeight:300, marginTop:'2px' }}>
+              Director, Cornerstone Developments · Pune
+            </p>
+          </div>
+          <div style={{ height:'1px', width:'36px', background:'rgba(201,168,76,0.3)' }}/>
+        </div>
+      </div>
+
+      {/* Bottom rule */}
+      <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'1px',
+        background:'linear-gradient(90deg,transparent,rgba(201,168,76,0.28),transparent)' }}/>
+    </section>
+  )
+}
