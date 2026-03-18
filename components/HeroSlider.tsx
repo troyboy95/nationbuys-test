@@ -74,14 +74,7 @@ export default function HeroSlider() {
         padding:'0 5rem',
         maxWidth:'800px',
       }}>
-        <div style={{ display:'flex', alignItems:'center', gap:'1rem', marginBottom:'1.5rem' }}>
-          <div style={{ width:'28px', height:'1px', background:'var(--gold)', flexShrink:0 }}/>
-          <span style={{
-            fontFamily:'Jost,sans-serif', fontSize:'0.6rem',
-            letterSpacing:'0.3em', textTransform:'uppercase',
-            color:'var(--gold)', fontWeight:300,
-          }}>Est. 2009 · RERA Compliant</span>
-        </div>
+        
 
         <h1 style={{ fontFamily:'Cormorant Garamond,serif', lineHeight:1.1, marginBottom:'1.25rem' }}>
           <span style={{

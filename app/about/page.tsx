@@ -136,7 +136,6 @@ export default function AboutPage() {
 
         <div className="ah__text">
           <div className="ah__vbar" />
-          <p className="ah__eyebrow"><span className="ah__eyebrow-dash" />Est. 2009 · Kalyani Nagar, Pune</p>
           <h1 className="ah__h1">
             <span className="ah__h1-ghost">The Story</span>
             <span className="ah__h1-ghost">Behind</span>

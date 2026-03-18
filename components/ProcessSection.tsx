@@ -52,16 +52,16 @@ export default function ProcessSection() {
   }, [])
 
   return (
-    <section ref={ref} style={{ background: 'var(--charcoal)', padding: '7rem 5rem', position: 'relative', overflow: 'hidden' }}>
+    <section ref={ref} style={{ background: 'var(--charcoal)', padding: '5rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
 
       {/* Decorative gold vertical line left */}
       <div style={{ position: 'absolute', left: 0, top: '15%', bottom: '15%', width: '2px', background: 'linear-gradient(180deg,transparent,var(--gold),transparent)' }}/>
 
       {/* Ghost watermark */}
       <div style={{
-        position: 'absolute', right: '-2rem', top: '50%', transform: 'translateY(-50%)',
+        position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)',
         fontFamily: 'Cormorant Garamond, serif',
-        fontSize: 'clamp(7rem,14vw,13rem)',
+        fontSize: 'clamp(5rem,14vw,13rem)',
         fontWeight: 300, lineHeight: 1,
         color: 'transparent',
         WebkitTextStroke: '1px rgba(201,168,76,0.04)',
@@ -73,11 +73,11 @@ export default function ProcessSection() {
       <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
         {/* Header */}
-        <div className="proc-anim" style={{ opacity: 0, transform: 'translateY(24px)', transition: 'all 0.8s ease', marginBottom: '4.5rem' }}>
+        <div className="proc-anim" style={{ opacity: 0, transform: 'translateY(24px)', transition: 'all 0.8s ease', marginBottom: '3rem' }}>
           <p style={{ fontFamily: 'Jost,sans-serif', fontSize: '0.6rem', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'var(--gold)', fontWeight: 300, marginBottom: '0.75rem' }}>
             How We Work
           </p>
-          <h2 style={{ fontFamily: 'Cormorant Garamond,serif', fontSize: 'clamp(2rem,3.5vw,3rem)', fontWeight: 300, color: 'rgba(255,255,255,0.92)', lineHeight: 1.15 }}>
+          <h2 style={{ fontFamily: 'Cormorant Garamond,serif', fontSize: 'clamp(1.8rem,3.5vw,3rem)', fontWeight: 300, color: 'rgba(255,255,255,0.92)', lineHeight: 1.15 }}>
             Your Journey to{' '}
             <span style={{ fontStyle: 'italic', background: 'linear-gradient(135deg,#E2C07A,#C9A84C)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Landmark Ownership
@@ -86,10 +86,7 @@ export default function ProcessSection() {
         </div>
 
         {/* Steps */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '0', position: 'relative' }}>
-
-          
-
+        <div className="proc-grid">
           {STEPS.map(({ num, title, sub, body, Icon }, i) => (
             <div
               key={i}
@@ -98,7 +95,6 @@ export default function ProcessSection() {
                 opacity: 0, transform: 'translateY(28px)',
                 transition: 'opacity 0.7s ease, transform 0.7s ease',
                 padding: '2.5rem 2.25rem',
-                borderRight: i < 2 ? '1px solid rgba(201,168,76,0.1)' : 'none',
                 position: 'relative', zIndex: 1,
                 cursor: 'default',
               }}
@@ -113,7 +109,6 @@ export default function ProcessSection() {
             >
               {/* Step number + icon row */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.75rem' }}>
-                {/* Icon circle */}
                 <div style={{
                   width: '52px', height: '52px', borderRadius: '50%',
                   border: '1px solid rgba(201,168,76,0.3)',
@@ -123,7 +118,6 @@ export default function ProcessSection() {
                   position: 'relative',
                 }}>
                   <Icon/>
-                  {/* Step badge */}
                   <span style={{
                     position: 'absolute', top: '-6px', right: '-6px',
                     width: '18px', height: '18px', borderRadius: '50%',
@@ -164,10 +158,50 @@ export default function ProcessSection() {
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '1px', background: 'linear-gradient(90deg,transparent,rgba(201,168,76,0.2),transparent)' }}/>
 
       <style>{`
+        .proc-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0;
+          position: relative;
+        }
+        .proc-grid .proc-card:not(:last-child) {
+          border-right: 1px solid rgba(201,168,76,0.1);
+        }
         .proc-card { transition: background 0.25s ease, opacity 0.7s ease, transform 0.7s ease !important; }
         .proc-card:hover .proc-bar { transform: scaleX(1) !important; }
-        @media (max-width: 768px) {
-          .proc-card { border-right: none !important; border-bottom: 1px solid rgba(201,168,76,0.1); }
+
+        @media (max-width: 900px) {
+          .proc-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .proc-grid .proc-card:not(:last-child) {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(201,168,76,0.1);
+          }
+          .proc-card { padding: 2rem 1.25rem !important; }
+        }
+
+        @media (min-width: 600px) and (max-width: 900px) {
+          .proc-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .proc-grid .proc-card:nth-child(odd):not(:last-child) {
+            border-right: 1px solid rgba(201,168,76,0.1) !important;
+            border-bottom: 1px solid rgba(201,168,76,0.1);
+          }
+          .proc-grid .proc-card:nth-child(even) {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(201,168,76,0.1);
+          }
+          .proc-grid .proc-card:last-child {
+            border-bottom: none !important;
+          }
+        }
+
+        @media (min-width: 901px) {
+          section[data-section="process"] {
+            padding: 7rem 5rem !important;
+          }
         }
       `}</style>
     </section>

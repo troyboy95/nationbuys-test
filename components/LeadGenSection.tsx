@@ -59,6 +59,7 @@ export default function LeadGenSection() {
     transition: 'border-color 0.25s, background 0.25s',
     letterSpacing: '0.03em',
     appearance: 'none' as const,
+    boxSizing: 'border-box' as const,
   }
 
   const labelStyle: React.CSSProperties = {
@@ -73,7 +74,7 @@ export default function LeadGenSection() {
   }
 
   return (
-    <section ref={ref} style={{ background: 'var(--obsidian)', padding: '7rem 5rem', position: 'relative', overflow: 'hidden' }}>
+    <section ref={ref} style={{ background: 'var(--obsidian)', padding: '5rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
 
       {/* Radial glow */}
       <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.05) 0%, transparent 60%)', pointerEvents: 'none' }}/>
@@ -81,7 +82,7 @@ export default function LeadGenSection() {
       {/* Gold vertical accent */}
       <div style={{ position: 'absolute', right: 0, top: '15%', bottom: '15%', width: '2px', background: 'linear-gradient(180deg,transparent,var(--gold),transparent)' }}/>
 
-      <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: '6rem', alignItems: 'center' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }} className="lg-layout">
 
         {/* LEFT: Info block */}
         <div>
@@ -89,7 +90,7 @@ export default function LeadGenSection() {
             <p style={{ fontFamily: 'Jost,sans-serif', fontSize: '0.6rem', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'var(--gold)', fontWeight: 300, marginBottom: '0.85rem' }}>
               Get in Touch
             </p>
-            <h2 style={{ fontFamily: 'Cormorant Garamond,serif', fontSize: 'clamp(2.2rem,3.5vw,3.2rem)', fontWeight: 300, color: 'rgba(255,255,255,0.92)', lineHeight: 1.15, marginBottom: '1.5rem' }}>
+            <h2 style={{ fontFamily: 'Cormorant Garamond,serif', fontSize: 'clamp(1.8rem,3.5vw,3.2rem)', fontWeight: 300, color: 'rgba(255,255,255,0.92)', lineHeight: 1.15, marginBottom: '1.5rem' }}>
               Send Us a{' '}
               <span style={{ fontStyle: 'italic', background: 'linear-gradient(135deg,#E2C07A,#C9A84C)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 Message
@@ -144,11 +145,12 @@ export default function LeadGenSection() {
         </div>
 
         {/* RIGHT: Form */}
-        <div className="lg-anim" style={{
+        <div className="lg-anim lg-form" style={{
           opacity: 0, transform: 'translateY(28px)', transition: 'all 0.9s ease',
           background: 'rgba(255,255,255,0.02)',
           border: '1px solid rgba(201,168,76,0.12)',
           padding: '2.5rem',
+          boxSizing: 'border-box',
         }}>
           {submitted ? (
             <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
@@ -168,7 +170,7 @@ export default function LeadGenSection() {
                 Advisory Request Form
               </p>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+              <div className="form-grid" style={{ marginBottom: '1rem' }}>
                 {/* Full Name */}
                 <div style={{ gridColumn: '1/-1' }}>
                   <label style={labelStyle}>Full Name <span style={{ color: 'var(--gold)' }}>*</span></label>
@@ -182,7 +184,7 @@ export default function LeadGenSection() {
                 </div>
 
                 {/* Email */}
-                <div>
+                <div className="form-email">
                   <label style={labelStyle}>Email <span style={{ color: 'var(--gold)' }}>*</span></label>
                   <input
                     type="email" placeholder="your@email.com"
@@ -194,7 +196,7 @@ export default function LeadGenSection() {
                 </div>
 
                 {/* Phone */}
-                <div>
+                <div className="form-phone">
                   <label style={labelStyle}>Phone Number <span style={{ color: 'var(--gold)' }}>*</span></label>
                   <input
                     type="tel" placeholder="+91 00000 00000"
@@ -218,7 +220,6 @@ export default function LeadGenSection() {
                       <option value="" style={{ background: '#111' }}>Select a service</option>
                       {SERVICES_LIST.map(s => <option key={s} value={s} style={{ background: '#111' }}>{s}</option>)}
                     </select>
-                    {/* Chevron */}
                     <div style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'rgba(201,168,76,0.5)' }}>
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                         <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -278,6 +279,46 @@ export default function LeadGenSection() {
       </div>
 
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '1px', background: 'linear-gradient(90deg,transparent,rgba(201,168,76,0.2),transparent)' }}/>
+
+      <style>{`
+        .lg-layout {
+          display: grid;
+          grid-template-columns: 1fr 1.4fr;
+          gap: 6rem;
+          align-items: center;
+        }
+
+        .form-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+          .lg-layout {
+            grid-template-columns: 1fr !important;
+            gap: 3.5rem !important;
+          }
+        }
+
+        @media (max-width: 540px) {
+          .form-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .form-email, .form-phone {
+            grid-column: 1 / -1 !important;
+          }
+          .lg-form {
+            padding: 1.5rem !important;
+          }
+        }
+
+        @media (min-width: 901px) {
+          section {
+            padding: 7rem 5rem;
+          }
+        }
+      `}</style>
     </section>
   )
 }

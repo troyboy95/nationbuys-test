@@ -2,11 +2,11 @@
 import { useEffect, useRef, useState } from 'react'
 
 const STATS = [
-  { label: 'Acres Transacted',    val: 200,  suffix: '+',   progress: 85, sub: 'Prime land parcels' },
+  { label: 'Acres Transacted',    val: 500,  suffix: '+',   progress: 85, sub: 'Prime land parcels' },
   { label: 'Portfolio Value',     val: 200,  suffix: 'Cr+', progress: 90, sub: 'Active mandates' },
   { label: 'Years of Mastery',    val: 17,   suffix: '+',   progress: 95, sub: 'Led by Swapnil Bora' },
   { label: 'Strategic Markets',   val: 4,    suffix: '',    progress: 70, sub: 'Pune · Mumbai · Goa · Dubai' },
-  { label: 'Mandates Executed',   val: 5,    suffix: '+',   progress: 40, sub: 'High-value closures' },
+  { label: 'Mandates Executed',   val: 50,   suffix: '+',   progress: 80, sub: 'High-value closures' },
   { label: 'Client Retention',    val: 98,   suffix: '%',   progress: 98, sub: 'Trust & repeat business' },
 ]
 
@@ -37,14 +37,14 @@ function StatCard({ s, delay }: { s: typeof STATS[0]; delay: number }) {
   }, [s.val, s.progress, delay])
 
   return (
-    <div ref={ref} style={{
+    <div ref={ref} className="stat-card" style={{
       background: 'rgba(18,18,18,0.75)',
       border: '1px solid rgba(201,168,76,0.1)',
       padding: '2rem 1.75rem',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      minHeight: '180px',
+      minHeight: '190px',
       cursor: 'default',
       transition: 'border-color 0.3s, background 0.3s',
     }}
@@ -61,26 +61,41 @@ function StatCard({ s, delay }: { s: typeof STATS[0]; delay: number }) {
     >
       <div>
         <p style={{
-          fontFamily:'Jost,sans-serif', fontSize:'0.72rem', fontWeight:400,
-          letterSpacing:'0.06em', color:'rgba(255,255,255,0.52)', lineHeight:1.35,
+          fontFamily:'Jost,sans-serif',
+          fontSize:'0.72rem',
+          fontWeight:400,
+          letterSpacing:'0.06em',
+          color:'rgba(255,255,255,0.52)',
+          lineHeight:1.35,
         }}>{s.label}</p>
         <p style={{
-          fontFamily:'Jost,sans-serif', fontSize:'0.58rem', fontWeight:300,
-          color:'rgba(255,255,255,0.22)', marginTop:'3px', letterSpacing:'0.04em',
+          fontFamily:'Jost,sans-serif',
+          fontSize:'0.58rem',
+          fontWeight:300,
+          color:'rgba(255,255,255,0.22)',
+          marginTop:'3px',
+          letterSpacing:'0.04em',
         }}>{s.sub}</p>
       </div>
+
       <div>
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'10px' }}>
           <span style={{
             fontFamily:'Cormorant Garamond,serif',
-            fontSize:'clamp(2.2rem,4vw,3.4rem)',
-            fontWeight:300, lineHeight:1,
+            fontSize:'clamp(2.6rem,4vw,3.4rem)',
+            fontWeight:300,
+            lineHeight:1,
             background:'linear-gradient(135deg,#E2C07A,#C9A84C)',
-            WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text',
+            WebkitBackgroundClip:'text',
+            WebkitTextFillColor:'transparent',
+            backgroundClip:'text',
           }}>{count.toLocaleString()}{s.suffix}</span>
           <span style={{
-            fontFamily:'Jost,sans-serif', fontSize:'0.68rem', fontWeight:400,
-            color:'rgba(201,168,76,0.65)', paddingBottom:'4px',
+            fontFamily:'Jost,sans-serif',
+            fontSize:'0.68rem',
+            fontWeight:400,
+            color:'rgba(201,168,76,0.65)',
+            paddingBottom:'4px',
           }}>{s.progress}%</span>
         </div>
         <div style={{ position:'relative', height:'2px', background:'rgba(255,255,255,0.08)', borderRadius:'1px' }}>
@@ -112,7 +127,10 @@ export default function StatsSection() {
         <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&q=60"
           alt="" style={{ width:'100%', height:'100%', objectFit:'cover', filter:'brightness(0.35)' }}/>
         <div style={{ position:'absolute', inset:0, background:'rgba(8,8,8,0.72)' }}/>
-        <div style={{ position:'absolute', inset:0, background:'radial-gradient(ellipse at 60% 50%, rgba(201,168,76,0.06) 0%, transparent 65%)' }}/>
+        <div style={{
+          position:'absolute', inset:0,
+          background:'radial-gradient(ellipse at 60% 50%, rgba(201,168,76,0.06) 0%, transparent 65%)',
+        }}/>
       </div>
 
       <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px', zIndex:1,
@@ -136,7 +154,7 @@ export default function StatsSection() {
           </p>
         </div>
 
-        <div className="stats-grid" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'1rem' }}>
+        <div className="stats-grid" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))', gap:'1rem' }}>
           {STATS.map((s, i) => <StatCard key={i} s={s} delay={i * 110} />)}
         </div>
       </div>
@@ -145,16 +163,20 @@ export default function StatsSection() {
         background:'linear-gradient(90deg,transparent,var(--gold),transparent)' }}/>
 
       <style>{`
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
           .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 768px) {
-          .stats-section { padding: 4rem 1.5rem !important; }
-          .stats-sub { display: none; }
+          .stats-section { padding: 5rem 2rem !important; }
+          .stats-header { flex-direction: column; align-items: flex-start !important; }
+          .stats-sub { max-width: 100% !important; text-align: left !important; }
+          .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
+          .stat-card { min-height: 160px !important; padding: 1.25rem 1rem !important; }
         }
         @media (max-width: 480px) {
-          .stats-section { padding: 3.5rem 1.25rem !important; }
-          .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.6rem !important; }
+          .stats-section { padding: 4rem 1.25rem !important; }
+          .stats-grid { grid-template-columns: 1fr !important; }
+          .stat-card { min-height: 140px !important; }
         }
       `}</style>
     </section>

@@ -44,7 +44,7 @@ export default function FAQSection() {
   }, [])
 
   return (
-    <section ref={ref} style={{ background: 'var(--charcoal)', padding: '7rem 5rem', position: 'relative', overflow: 'hidden' }}>
+    <section ref={ref} style={{ background: 'var(--charcoal)', padding: '5rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
 
       {/* Ghost watermark */}
       <div style={{
@@ -58,14 +58,14 @@ export default function FAQSection() {
         letterSpacing: '0.05em',
       }}>FAQ</div>
 
-      <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: '6rem', alignItems: 'start' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }} className="faq-layout">
 
         {/* LEFT: Heading */}
-        <div className="faq-anim" style={{ opacity: 0, transform: 'translateY(24px)', transition: 'all 0.8s ease', position: 'sticky', top: '100px' }}>
+        <div className="faq-anim faq-left" style={{ opacity: 0, transform: 'translateY(24px)', transition: 'all 0.8s ease' }}>
           <p style={{ fontFamily: 'Jost,sans-serif', fontSize: '0.6rem', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'var(--gold)', fontWeight: 300, marginBottom: '0.85rem' }}>
             Got Questions?
           </p>
-          <h2 style={{ fontFamily: 'Cormorant Garamond,serif', fontSize: 'clamp(2rem,3vw,2.8rem)', fontWeight: 300, color: 'rgba(255,255,255,0.92)', lineHeight: 1.2, marginBottom: '1.5rem' }}>
+          <h2 style={{ fontFamily: 'Cormorant Garamond,serif', fontSize: 'clamp(1.8rem,3vw,2.8rem)', fontWeight: 300, color: 'rgba(255,255,255,0.92)', lineHeight: 1.2, marginBottom: '1.5rem' }}>
             Your Questions,{' '}
             <span style={{ display: 'block', fontStyle: 'italic', background: 'linear-gradient(135deg,#E2C07A,#C9A84C)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Elegantly Answered
@@ -79,12 +79,12 @@ export default function FAQSection() {
           <div style={{ width: '48px', height: '1px', background: 'linear-gradient(90deg,var(--gold),transparent)', margin: '2rem 0' }}/>
 
           <p style={{ fontFamily: 'Jost,sans-serif', fontSize: '0.65rem', color: 'rgba(201,168,76,0.6)', fontWeight: 300, letterSpacing: '0.04em' }}>
-            Est. 2007 · RERA Compliant
+            Est. 2009 · RERA Compliant
           </p>
         </div>
 
         {/* RIGHT: Accordion */}
-        <div>
+        <div className="faq-right">
           {FAQS.map(({ q, a }, i) => (
             <div
               key={i}
@@ -105,7 +105,7 @@ export default function FAQSection() {
               >
                 <span style={{
                   fontFamily: 'Cormorant Garamond,serif',
-                  fontSize: 'clamp(1rem,1.4vw,1.2rem)',
+                  fontSize: 'clamp(0.95rem,1.4vw,1.2rem)',
                   fontWeight: open === i ? 500 : 400,
                   color: open === i ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.55)',
                   lineHeight: 1.3,
@@ -152,6 +152,36 @@ export default function FAQSection() {
 
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '1px', background: 'linear-gradient(90deg,transparent,rgba(201,168,76,0.2),transparent)' }}/>
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '1px', background: 'linear-gradient(90deg,transparent,rgba(201,168,76,0.2),transparent)' }}/>
+
+      <style>{`
+        .faq-layout {
+          display: grid;
+          grid-template-columns: 1fr 1.6fr;
+          gap: 6rem;
+          align-items: start;
+        }
+        .faq-left {
+          position: sticky;
+          top: 100px;
+        }
+        .faq-right {}
+
+        @media (max-width: 900px) {
+          .faq-layout {
+            grid-template-columns: 1fr !important;
+            gap: 3rem !important;
+          }
+          .faq-left {
+            position: static !important;
+          }
+        }
+
+        @media (min-width: 901px) {
+          section {
+            padding: 7rem 5rem;
+          }
+        }
+      `}</style>
     </section>
   )
 }

@@ -24,21 +24,34 @@ export default function ScheduleVisit() {
   }, [])
 
   return (
-    <section ref={ref} style={{ background: 'var(--smoke)', padding: '7rem 5rem', position: 'relative', overflow: 'hidden' }}>
+    <section ref={ref} style={{ background: 'var(--smoke)', padding: '5rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
 
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
 
         {/* Header split layout */}
-        <div className="sv-anim" style={{ opacity: 0, transform: 'translateY(24px)', transition: 'all 0.8s ease', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3.5rem', gap: '2rem' }}>
+        <div
+          className="sv-anim sv-header"
+          style={{
+            opacity: 0,
+            transform: 'translateY(24px)',
+            transition: 'all 0.8s ease',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            alignItems: 'flex-end',
+            marginBottom: '3.5rem',
+            gap: '2rem',
+          }}
+        >
           <div>
             <p style={{ fontFamily: 'Jost,sans-serif', fontSize: '0.6rem', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'var(--gold-dim)', fontWeight: 400, marginBottom: '0.6rem' }}>
               Exclusive Site Visits
             </p>
-            <h2 style={{ fontFamily: 'Cormorant Garamond,serif', fontSize: 'clamp(2rem,3.5vw,3rem)', fontWeight: 300, color: '#0d0d0d', lineHeight: 1.15 }}>
+            <h2 style={{ fontFamily: 'Cormorant Garamond,serif', fontSize: 'clamp(1.8rem,3.5vw,3rem)', fontWeight: 300, color: '#0d0d0d', lineHeight: 1.15 }}>
               Schedule a Visit
             </h2>
           </div>
-          <div style={{ maxWidth: '300px' }}>
+          <div className="sv-sub">
             <p style={{ fontFamily: 'Jost,sans-serif', fontSize: '0.72rem', color: 'rgba(0,0,0,0.4)', fontWeight: 300, lineHeight: 1.75, marginBottom: '1.25rem' }}>
               Experience prime land parcels and pre-leased assets firsthand. Our team curates every visit for a decisive, informed investment experience.
             </p>
@@ -66,7 +79,7 @@ export default function ScheduleVisit() {
         <div style={{ height: '1px', background: 'rgba(0,0,0,0.08)', marginBottom: '2.5rem' }}/>
 
         {/* City cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '12px' }}>
+        <div className="sv-grid">
           {CITIES.map(({ name, tagline, img }, i) => (
             <div
               key={i}
@@ -74,7 +87,7 @@ export default function ScheduleVisit() {
               style={{
                 opacity: 0, transform: 'translateY(20px)',
                 transition: 'opacity 0.65s ease, transform 0.65s ease',
-                position: 'relative', height: '300px', overflow: 'hidden',
+                position: 'relative', overflow: 'hidden',
                 cursor: 'pointer',
               }}
             >
@@ -108,14 +121,47 @@ export default function ScheduleVisit() {
       </div>
 
       <style>{`
+        .sv-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+        }
+        .sv-card {
+          height: 300px;
+        }
         .sv-card:hover .sv-img    { transform: scale(1.06); }
         .sv-card:hover .sv-border { border-color: rgba(201,168,76,0.45) !important; }
         .sv-card:hover .sv-accent { width: 64px !important; }
-        @media (max-width: 900px) {
+
+        .sv-sub { max-width: 300px; }
+
+        @media (max-width: 1024px) {
+          .sv-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .sv-card { height: 260px !important; }
+        }
+
+        @media (max-width: 600px) {
+          .sv-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .sv-card { height: 200px !important; }
+          .sv-header { flex-direction: column; align-items: flex-start !important; }
+          .sv-sub { max-width: 100% !important; }
+        }
+
+        @media (max-width: 380px) {
+          .sv-grid {
+            grid-template-columns: 1fr !important;
+          }
           .sv-card { height: 220px !important; }
         }
-        @media (max-width: 600px) {
-          [style*="gridTemplateColumns: repeat(4,1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+
+        @media (min-width: 901px) {
+          section {
+            padding: 7rem 5rem;
+          }
         }
       `}</style>
     </section>

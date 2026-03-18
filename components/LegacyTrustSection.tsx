@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 
 const TESTIMONIALS = [
   {
-    quote: "NBR Realty's execution on our 300-acre mandate was extraordinary. Their market insight and deep network unlocked value we hadn't imagined possible.",
+    quote: "nation Buys Realtor's execution on our 300-acre mandate was extraordinary. Their market insight and deep network unlocked value we hadn't imagined possible.",
     name: 'Arvind Mehta',
     role: 'Director, Cornerstone Developments · Pune',
     initials: 'AM',

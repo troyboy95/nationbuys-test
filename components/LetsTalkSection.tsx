@@ -14,7 +14,7 @@ export default function LetsTalkSection() {
           el.style.transform = 'translateY(0)'
         }, i * 120)
       })
-    }, { threshold: 0.1 })
+    }, { threshold: 0.08 })
     if (ref.current) obs.observe(ref.current)
     return () => obs.disconnect()
   }, [])
@@ -22,11 +22,7 @@ export default function LetsTalkSection() {
   return (
     <section
       ref={ref}
-      style={{
-        background: 'var(--obsidian)',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
+      style={{ background: 'var(--obsidian)', position: 'relative', overflow: 'hidden' }}
     >
       {/* Top rule */}
       <div style={{
@@ -44,65 +40,33 @@ export default function LetsTalkSection() {
       <div style={{
         position: 'absolute', bottom: '-2.5rem', left: '-1rem',
         fontFamily: 'Cormorant Garamond, serif',
-        fontSize: 'clamp(7rem,13vw,12rem)',
+        fontSize: 'clamp(5rem,13vw,12rem)',
         fontWeight: 300, lineHeight: 1,
         color: 'transparent',
         WebkitTextStroke: '1px rgba(201,168,76,0.042)',
         userSelect: 'none', pointerEvents: 'none',
-        letterSpacing: '0.06em',
-        whiteSpace: 'nowrap',
-      }}>Nation Buys Realtors</div>
+        letterSpacing: '0.06em', whiteSpace: 'nowrap',
+      }}>NBR</div>
 
-      {/* ── Two-column layout ── */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 420px',
-        minHeight: '560px',
-      }}>
+      {/* ── Layout grid ── */}
+      <div className="ltt-grid" style={{ position: 'relative', zIndex: 1 }}>
 
-        {/* ──────────── LEFT: centered heading ──────────── */}
-        <div style={{
-          display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center',
-          padding: '7rem 5rem',
-          textAlign: 'center',
-          position: 'relative',
-          zIndex: 1,
-        }}>
+        {/* ── LEFT: centered heading ── */}
+        <div className="ltt-left">
 
           {/* Eyebrow */}
-          <div
-            className="ltt-anim"
-            style={{
-              opacity: 0, transform: 'translateY(18px)',
-              transition: 'opacity 0.75s ease, transform 0.75s ease',
-              display: 'flex', alignItems: 'center', gap: '1rem',
-              marginBottom: '1.5rem',
-            }}
-          >
-            <div style={{ width: '28px', height: '1px', background: 'var(--gold)' }} />
+          <div className="ltt-anim ltt-eyebrow">
+            <div style={{ width: '28px', height: '1px', background: 'var(--gold)', flexShrink: 0 }} />
             <span style={{
               fontFamily: 'Jost, sans-serif', fontSize: '0.58rem',
               letterSpacing: '0.4em', textTransform: 'uppercase',
               color: 'var(--gold)', fontWeight: 300,
             }}>Get in Touch</span>
-            <div style={{ width: '28px', height: '1px', background: 'var(--gold)' }} />
+            <div style={{ width: '28px', height: '1px', background: 'var(--gold)', flexShrink: 0 }} />
           </div>
 
           {/* Heading */}
-          <h2
-            className="ltt-anim"
-            style={{
-              opacity: 0, transform: 'translateY(24px)',
-              transition: 'opacity 0.85s ease, transform 0.85s ease',
-              fontFamily: 'Cormorant Garamond, serif',
-              fontSize: 'clamp(2.8rem,4.5vw,4.2rem)',
-              fontWeight: 300, lineHeight: 1.1,
-              color: 'rgba(255,255,255,0.92)',
-              letterSpacing: '-0.01em',
-              marginBottom: '1.5rem',
-            }}
-          >
+          <h2 className="ltt-anim ltt-heading">
             Let's Talk About<br />
             <span style={{
               fontStyle: 'italic',
@@ -114,73 +78,57 @@ export default function LetsTalkSection() {
           </h2>
 
           {/* Subtext */}
-          <p
-            className="ltt-anim"
-            style={{
-              opacity: 0, transform: 'translateY(18px)',
-              transition: 'opacity 0.8s ease, transform 0.8s ease',
-              fontFamily: 'Jost, sans-serif',
-              fontSize: '0.76rem',
-              color: 'rgba(255,255,255,0.32)',
-              fontWeight: 300,
-              lineHeight: 1.85,
-              letterSpacing: '0.03em',
-              maxWidth: '400px',
-              marginBottom: '2.5rem',
-            }}
-          >
+          <p className="ltt-anim ltt-sub">
             Whether you're seeking prime land parcels, pre-leased commercial assets,
-            or bespoke investment advisory — our team is ready to deliver beyond expectation.
+            or bespoke investment advisory, our team is ready to deliver beyond expectation.
           </p>
 
           {/* CTA */}
-          <div
-            className="ltt-anim"
-            style={{
-              opacity: 0, transform: 'translateY(16px)',
-              transition: 'opacity 0.8s ease, transform 0.8s ease',
-            }}
-          >
-            
-
+          <div className="ltt-anim" style={{ opacity: 0, transform: 'translateY(16px)', transition: 'opacity 0.8s ease, transform 0.8s ease' }}>
+            <Link
+              href="/contact"
+              className="ltt-cta"
+              style={{
+                fontFamily: 'Jost, sans-serif',
+                fontSize: '0.65rem', fontWeight: 500,
+                letterSpacing: '0.22em', textTransform: 'uppercase',
+                background: 'linear-gradient(135deg,var(--gold-light),var(--gold))',
+                color: 'var(--obsidian)', textDecoration: 'none',
+                padding: '0.9rem 2.4rem',
+                display: 'inline-flex', alignItems: 'center', gap: '10px',
+                transition: 'transform 0.2s, opacity 0.2s',
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.transform = 'translateY(-2px)'; el.style.opacity = '0.88'
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.transform = 'translateY(0)'; el.style.opacity = '1'
+              }}
+            >
+              Send an Enquiry
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                <path d="M1.5 6.5h10M7 2l4.5 4.5L7 11" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
           </div>
         </div>
 
-        {/* ──────────── RIGHT: contact panel ──────────── */}
-        <div
-          className="ltt-anim"
-          style={{
-            opacity: 0, transform: 'translateY(20px)',
-            transition: 'opacity 0.9s ease, transform 0.9s ease',
-            borderLeft: '1px solid rgba(201,168,76,0.1)',
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'relative',
-            zIndex: 1,
-            background: 'rgba(255,255,255,0.012)',
-          }}
-        >
+        {/* ── RIGHT: contact panel ── */}
+        <div className="ltt-anim ltt-panel">
+
           {/* Panel heading */}
-          <div style={{
-            padding: '2.8rem 2.5rem 2rem',
-            borderBottom: '1px solid rgba(201,168,76,0.08)',
-          }}>
+          <div style={{ padding: '2.8rem 2.5rem 2rem', borderBottom: '1px solid rgba(201,168,76,0.08)' }}>
             <p style={{
-              fontFamily: 'Jost, sans-serif',
-              fontSize: '0.55rem',
-              letterSpacing: '0.38em',
-              textTransform: 'uppercase',
-              color: 'rgba(201,168,76,0.55)',
-              fontWeight: 400,
-              marginBottom: '0.6rem',
+              fontFamily: 'Jost, sans-serif', fontSize: '0.55rem',
+              letterSpacing: '0.38em', textTransform: 'uppercase',
+              color: 'rgba(201,168,76,0.55)', fontWeight: 400, marginBottom: '0.6rem',
             }}>Direct Contact</p>
             <p style={{
-              fontFamily: 'Cormorant Garamond, serif',
-              fontSize: '1.35rem',
-              fontWeight: 300,
-              color: 'rgba(255,255,255,0.72)',
-              lineHeight: 1.3,
-            }}>Reach us directly.</p>
+              fontFamily: 'Cormorant Garamond, serif', fontSize: '1.35rem',
+              fontWeight: 300, color: 'rgba(255,255,255,0.72)', lineHeight: 1.3,
+            }}>Reach us directly.<br />We're ready.</p>
           </div>
 
           {/* Contact rows */}
@@ -234,12 +182,9 @@ export default function LetsTalkSection() {
               boxShadow: '0 0 6px 1px rgba(201,168,76,0.5)',
             }} />
             <p style={{
-              fontFamily: 'Jost, sans-serif',
-              fontSize: '0.57rem',
-              color: 'rgba(255,255,255,0.18)',
-              fontWeight: 300,
-              letterSpacing: '0.06em',
-            }}>Est. 2009 · RERA Compliant · Trusted by 500+ Clients</p>
+              fontFamily: 'Jost, sans-serif', fontSize: '0.57rem',
+              color: 'rgba(255,255,255,0.18)', fontWeight: 300, letterSpacing: '0.06em',
+            }}>Est. 2007 · RERA Compliant · Trusted by 500+ Clients</p>
           </div>
         </div>
       </div>
@@ -249,6 +194,98 @@ export default function LetsTalkSection() {
         position: 'absolute', bottom: 0, left: 0, right: 0, height: '1px',
         background: 'linear-gradient(90deg,transparent,rgba(201,168,76,0.28),transparent)',
       }} />
+
+      <style>{`
+        /* ── Base (desktop) ── */
+        .ltt-grid {
+          display: grid;
+          grid-template-columns: 1fr 420px;
+          min-height: 560px;
+        }
+        .ltt-left {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 7rem 5rem;
+          text-align: center;
+        }
+        .ltt-eyebrow {
+          opacity: 0;
+          transform: translateY(18px);
+          transition: opacity 0.75s ease, transform 0.75s ease;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+        }
+        .ltt-heading {
+          opacity: 0;
+          transform: translateY(24px);
+          transition: opacity 0.85s ease, transform 0.85s ease;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+          font-weight: 300;
+          line-height: 1.1;
+          color: rgba(255,255,255,0.92);
+          letter-spacing: -0.01em;
+          margin-bottom: 1.5rem;
+        }
+        .ltt-sub {
+          opacity: 0;
+          transform: translateY(18px);
+          transition: opacity 0.8s ease, transform 0.8s ease;
+          font-family: 'Jost', sans-serif;
+          font-size: 0.76rem;
+          color: rgba(255,255,255,0.32);
+          font-weight: 300;
+          line-height: 1.85;
+          letter-spacing: 0.03em;
+          max-width: 400px;
+          margin-bottom: 2.5rem;
+        }
+        .ltt-panel {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.9s ease, transform 0.9s ease;
+          border-left: 1px solid rgba(201,168,76,0.1);
+          display: flex;
+          flex-direction: column;
+          background: rgba(255,255,255,0.012);
+        }
+
+        /* ── Tablet (≤ 900px): stack vertically ── */
+        @media (max-width: 900px) {
+          .ltt-grid {
+            grid-template-columns: 1fr;
+            min-height: unset;
+          }
+          .ltt-left {
+            padding: 5rem 3rem 4rem;
+          }
+          .ltt-panel {
+            border-left: none;
+            border-top: 1px solid rgba(201,168,76,0.1);
+          }
+        }
+
+        /* ── Mobile (≤ 580px) ── */
+        @media (max-width: 580px) {
+          .ltt-left {
+            padding: 4rem 1.5rem 3rem;
+          }
+          .ltt-heading {
+            font-size: clamp(2.2rem, 8vw, 3rem) !important;
+          }
+          .ltt-sub {
+            font-size: 0.72rem;
+            max-width: 100%;
+          }
+          .ltt-eyebrow {
+            gap: 0.6rem;
+          }
+        }
+      `}</style>
     </section>
   )
 }
@@ -268,15 +305,12 @@ function ContactItem({
     <a
       href={href}
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '1.1rem',
+        display: 'flex', alignItems: 'center', gap: '1.1rem',
         padding: '1.8rem 2.5rem',
         borderBottom: isLast ? 'none' : '1px solid rgba(201,168,76,0.06)',
         textDecoration: 'none',
         transition: 'background 0.28s',
-        cursor: 'pointer',
-        position: 'relative',
+        cursor: 'pointer', position: 'relative',
       }}
       onMouseEnter={e => {
         const el = e.currentTarget as HTMLElement
@@ -292,17 +326,14 @@ function ContactItem({
       }}
     >
       {/* Left hover accent */}
-      <div
-        className="ci-bar"
-        style={{
-          position: 'absolute', left: 0, top: 0, bottom: 0, width: '2px',
-          background: 'linear-gradient(180deg,transparent,var(--gold),transparent)',
-          transform: 'scaleY(0)', transformOrigin: 'center',
-          transition: 'transform 0.3s ease',
-        }}
-      />
+      <div className="ci-bar" style={{
+        position: 'absolute', left: 0, top: 0, bottom: 0, width: '2px',
+        background: 'linear-gradient(180deg,transparent,var(--gold),transparent)',
+        transform: 'scaleY(0)', transformOrigin: 'center',
+        transition: 'transform 0.3s ease',
+      }} />
 
-      {/* Icon box */}
+      {/* Icon */}
       <div style={{
         flexShrink: 0, width: '36px', height: '36px',
         border: '1px solid rgba(201,168,76,0.16)',
@@ -315,23 +346,18 @@ function ContactItem({
       {/* Text */}
       <div style={{ flex: 1, minWidth: 0 }}>
         <p style={{
-          fontFamily: 'Jost, sans-serif',
-          fontSize: '0.52rem', letterSpacing: '0.28em',
-          textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.25)', fontWeight: 400,
-          marginBottom: '0.3rem',
+          fontFamily: 'Jost, sans-serif', fontSize: '0.52rem',
+          letterSpacing: '0.28em', textTransform: 'uppercase',
+          color: 'rgba(255,255,255,0.25)', fontWeight: 400, marginBottom: '0.3rem',
         }}>{label}</p>
         <p style={{
-          fontFamily: 'Cormorant Garamond, serif',
-          fontSize: '1rem', fontWeight: 400,
-          color: 'rgba(255,255,255,0.8)',
-          lineHeight: 1.2, marginBottom: '0.22rem',
+          fontFamily: 'Cormorant Garamond, serif', fontSize: '1rem', fontWeight: 400,
+          color: 'rgba(255,255,255,0.8)', lineHeight: 1.2, marginBottom: '0.22rem',
           whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
         }}>{primary}</p>
         <p style={{
           fontFamily: 'Jost, sans-serif', fontSize: '0.58rem',
-          color: 'rgba(255,255,255,0.22)', fontWeight: 300,
-          letterSpacing: '0.03em',
+          color: 'rgba(255,255,255,0.22)', fontWeight: 300, letterSpacing: '0.03em',
         }}>{secondary}</p>
       </div>
 

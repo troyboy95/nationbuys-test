@@ -95,8 +95,8 @@ export default function TestimonialsSection() {
       </div>
 
       {/* MARQUEE 1 — Developers */}
-      <div style={{ marginBottom:'0' }}>
-        <div className="trust-heading" style={{ maxWidth:'1280px', margin:'0 auto', padding:'0 5rem', marginBottom:'0.75rem' }}>
+      <div>
+        <div style={{ textAlign:'center', marginBottom:'0.75rem' }}>
           <p style={{
             fontFamily:'Jost,sans-serif', fontSize:'0.52rem',
             letterSpacing:'0.35em', textTransform:'uppercase',
@@ -116,7 +116,7 @@ export default function TestimonialsSection() {
             animation:'marquee 42s linear infinite',
           }}>
             {ALL_DEV.map((logo, i) => (
-              <div key={i} style={{
+              <div key={i} className="trust-logo-tile" style={{
                 flexShrink:0,
                 width:'150px', height:'70px',
                 display:'flex', flexDirection:'column',
@@ -152,8 +152,8 @@ export default function TestimonialsSection() {
       </div>
 
       {/* MARQUEE 2 — Retail */}
-      <div style={{ marginTop:'0' }}>
-        <div className="trust-heading" style={{ maxWidth:'1280px', margin:'0 auto', padding:'0 5rem', marginBottom:'0.75rem', marginTop:'1.5rem' }}>
+      <div style={{ marginTop:'1.5rem' }}>
+        <div style={{ textAlign:'center', marginBottom:'0.75rem' }}>
           <p style={{
             fontFamily:'Jost,sans-serif', fontSize:'0.52rem',
             letterSpacing:'0.35em', textTransform:'uppercase',
@@ -173,7 +173,7 @@ export default function TestimonialsSection() {
             animation:'marquee 50s linear infinite reverse',
           }}>
             {ALL_RETAIL.map((logo, i) => (
-              <div key={i} style={{
+              <div key={i} className="trust-logo-tile" style={{
                 flexShrink:0,
                 width:'150px', height:'70px',
                 display:'flex', flexDirection:'column',
@@ -246,13 +246,15 @@ export default function TestimonialsSection() {
 
       <style>{`
         @media (max-width: 768px) {
-          .trust-section { padding: 4rem 0 3rem !important; }
-          .trust-heading { padding: 0 1.5rem !important; }
-          .trust-quote   { padding: 0 1.5rem !important; margin-top: 3rem !important; }
+          .trust-section  { padding: 4rem 0 3rem !important; }
+          .trust-heading  { padding: 0 1.5rem !important; margin-bottom: 2.5rem !important; }
+          .trust-quote    { padding: 0 1.5rem !important; margin-top: 3rem !important; }
+          .trust-logo-tile { width: 120px !important; height: 60px !important; }
         }
         @media (max-width: 480px) {
-          .trust-heading { padding: 0 1rem !important; }
-          .trust-quote   { padding: 0 1rem !important; }
+          .trust-heading  { padding: 0 1rem !important; }
+          .trust-quote    { padding: 0 1rem !important; }
+          .trust-logo-tile { width: 100px !important; height: 56px !important; }
         }
       `}</style>
     </section>
