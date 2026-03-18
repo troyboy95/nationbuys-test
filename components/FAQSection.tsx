@@ -8,7 +8,7 @@ const FAQS = [
   },
   {
     q: 'How do I schedule a property viewing?',
-    a: "Simply reach out via our contact form, call us directly, or click 'Book a Visit' anywhere on the site. Our advisory team will coordinate an exclusive, curated site visit at your earliest convenience — tailored to your specific mandate.",
+    a: "Simply reach out via our contact form, call us directly, or click 'Book a Visit' anywhere on the site. Our advisory team will coordinate an exclusive, curated site visit at your earliest convenience  tailored to your specific mandate.",
   },
   {
     q: 'What types of properties do you specialize in?',
@@ -20,7 +20,7 @@ const FAQS = [
   },
   {
     q: 'What is the minimum investment threshold?',
-    a: 'Our mandates typically begin at ₹5 Crore for land parcels and pre-leased assets. However, we encourage all serious investors to connect with us — we will transparently advise whether an opportunity aligns with your specific investment goals.',
+    a: 'Our mandates typically begin at ₹5 Crore for land parcels and pre-leased assets. However, we encourage all serious investors to connect with us  we will transparently advise whether an opportunity aligns with your specific investment goals.',
   },
   {
     q: 'Do you work with international clients?',

@@ -57,18 +57,18 @@ function useCounter(target: number, tick: number, delay = 0) {
 
 /* ── Data ── */
 const TIMELINE = [
-  { year: '2009', title: 'Foundation',        body: 'Nation Buys Realtors  established in Pune\'s Kalyani Nagar by Swapnil Bora — singular focus on unlocking untapped potential in expansive land parcels.' },
+  { year: '2009', title: 'Foundation',        body: 'Nation Buys Realtors  established in Pune\'s Kalyani Nagar by Swapnil Bora singular focus on unlocking untapped potential in expansive land parcels.' },
   { year: '2010', title: 'First Mega-Mandate',body: 'Facilitated a landmark 14-acre transaction in Pune\'s emerging corridors, setting the benchmark for large-scale land brokerage.' },
   { year: '2013', title: 'Legacy Achieved',   body: 'Surpassed 200+ acres transacted, ₹200 Cr+ in active mandates, and 98% client retention.' },
   { year: '2015', title: 'Mumbai & Goa Expansion', body: 'Extended footprint to Mumbai and Navi Mumbai, capturing premium commercial land and pre-leased portfolio mandates and Goa\'s luxury coastal land.' },
   { year: '2021', title: 'Dubai',             body: 'Crossed national borders with strategic mandates in Dubai\'s high-yield commercial real estate.' },
-  { year: '2026', title: 'Reotek Launch',     body: 'Launched Reotek — delivering 1M sq ft of managed enterprise office spaces across Pune and Mumbai.' },
+  { year: '2026', title: 'Reotek Launch',     body: 'Launched Reotek  delivering 1M sq ft of managed enterprise office spaces across Pune and Mumbai.' },
   
 
 ]
 
 const TEAM = [
-  { name: 'Swapnil Bora',  role: 'Founder & Managing Director', exp: '17+ Yrs', desc: 'Visionary architect behind Nation Buys Realtors \'s rise — expert in mega-parcel strategy, developer relations, and landmark outcomes.', initial: 'SB', color: '#C9A84C' },
+  { name: 'Swapnil Bora',  role: 'Founder & Managing Director', exp: '17+ Yrs', desc: 'Visionary architect behind Nation Buys Realtors \'s rise  expert in mega-parcel strategy, developer relations, and landmark outcomes.', initial: 'SB', color: '#C9A84C' },
   { name: 'Preeti W',      role: 'Property Consultant',         exp: '12 Yrs',  desc: 'Manages end-to-end pre-leased transactions ensuring optimal yield alignment for investors.',                                 initial: 'PW', color: '#A07830' },
 ]
 
@@ -82,7 +82,7 @@ const STATS = [
 const VALUES = [
   { icon: '◈', title: 'Trust First',         body: 'RERA-compliant processes ensure clean, verifiable transactions from mandate to close.' },
   { icon: '◇', title: 'Market Foresight',    body: 'Proprietary insight spots hidden potential in expansive holdings before the broader market catches up.' },
-  { icon: '◉', title: 'Seamless Execution',  body: 'End-to-end support across legal, valuation, due diligence, and negotiation — outcomes, not just introductions.' },
+  { icon: '◉', title: 'Seamless Execution',  body: 'End-to-end support across legal, valuation, due diligence, and negotiation outcomes, not just introductions.' },
   { icon: '◎', title: 'We Succeed Together', body: 'Fee structures aligned with your success. When your land transacts at maximum value, we\'ve done our job.' },
 ]
 
@@ -143,7 +143,7 @@ export default function AboutPage() {
             <span className="ah__h1-ghost">Behind</span>
             <span className="ah__h1-gold">Nation Buys Realtors</span>
           </h1>
-          <p className="ah__tagline">Redefining how India's most ambitious land mandates get done — through expertise, trust, and an unrelenting drive to create lasting value.</p>
+          <p className="ah__tagline">Redefining how India's most ambitious land mandates get done  through expertise, trust, and an unrelenting drive to create lasting value.</p>
           <div className="ah__stats">
             {[['500+','Acres'],['17+','Years'],['98%','Retention']].map(([n,l]) => (
               <div key={l} className="ah__stat">
@@ -182,8 +182,8 @@ export default function AboutPage() {
             <p className="ey"><span className="ey-bar" />Our Story</p>
             <h2 className="sh">Where Vision Meets<br /><em className="gi">Vast Land</em></h2>
             <div className="grule" />
-            <p className="bt mb-5">Nation buys Realtors  empowers builders and landowners to scale their visions through vast development lands and high-yield pre-leased assets. Based in Pune's Kalyani Nagar, we specialize in unlocking expansive parcels primed for mega-developments — residential towers, commercial hubs, and industrial complexes.</p>
-            <p className="bt mb-7">Led by Swapnil Bora with over 17 years of mastery, our "We Succeed Together" ethos drives proactive strategies far beyond ordinary plots — across Pune, Mumbai, Goa, and Dubai.</p>
+            <p className="bt mb-5">Nation buys Realtors  empowers builders and landowners to scale their visions through vast development lands and high-yield pre-leased assets. Based in Pune's Kalyani Nagar, we specialize in unlocking expansive parcels primed for mega-developments  residential towers, commercial hubs, and industrial complexes.</p>
+            <p className="bt mb-7">Led by Swapnil Bora with over 17 years of mastery, our "We Succeed Together" ethos drives proactive strategies far beyond ordinary plots across Pune, Mumbai, Goa, and Dubai.</p>
             <div className="ai__cities">
               {[
                 { city:'Pune',   img:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=240&q=75' },
@@ -247,7 +247,7 @@ export default function AboutPage() {
                 tag:'Vision', img:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=75',
                 icon:<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" width="22" height="22"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" strokeLinecap="round" strokeLinejoin="round"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" strokeLinecap="round" strokeLinejoin="round"/></svg>,
                 heading:"Pune's Foremost Catalyst for Iconic Developments",
-                body:"To be Pune's foremost catalyst for transforming vast land parcels into iconic developments and securing enduring value through premier pre-leased assets — across India and beyond.",
+                body:"To be Pune's foremost catalyst for transforming vast land parcels into iconic developments and securing enduring value through premier pre-leased assets  across India and beyond.",
                 delay:0,
               },
               {
@@ -329,7 +329,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══════════════════════════════════════
-          TEAM — fixed for 2 members
+          TEAM  fixed for 2 members
       ══════════════════════════════════════ */}
       <section className="atm">
         {/* Cinematic photo strip across top */}
@@ -355,7 +355,7 @@ export default function AboutPage() {
               <p className="ey">Our People</p>
               <h2 className="sh">The Minds Behind <em className="gi">Nation Buys Realtors</em></h2>
             </div>
-            <p className="bt atm__sub">A focused, high-conviction team — experts who see value where others see vacant land.</p>
+            <p className="bt atm__sub">A focused, high-conviction team experts who see value where others see vacant land.</p>
           </div>
           <div className="atm__hr" />
 

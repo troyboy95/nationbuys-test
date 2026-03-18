@@ -4,7 +4,7 @@ import Header from '@/components/Header'
 
 
 export const metadata: Metadata = {
-  title: 'NBR Realty — Prime Lands & Pre-Leased Yields',
+  title: 'Nation Buys Realtor  Prime Lands & Pre-Leased Yields',
   description: 'Elevate Ambitions with NBR: Expert facilitation of prime land transactions and pre-leased commercial portfolios across Pune, Mumbai, Goa and Dubai.',
 }
 

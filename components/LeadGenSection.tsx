@@ -97,7 +97,7 @@ export default function LeadGenSection() {
               </span>
             </h2>
             <p style={{ fontFamily: 'Jost,sans-serif', fontSize: '0.74rem', color: 'rgba(255,255,255,0.32)', fontWeight: 300, lineHeight: 1.8, maxWidth: '340px', marginBottom: '3rem' }}>
-              Whether you have a mandate to place, a site to acquire, or simply wish to explore possibilities — our advisory team responds within 24 hours.
+              Whether you have a mandate to place, a site to acquire, or simply wish to explore possibilities  our advisory team responds within 24 hours.
             </p>
           </div>
 

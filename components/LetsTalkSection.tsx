@@ -184,7 +184,7 @@ export default function LetsTalkSection() {
             <p style={{
               fontFamily: 'Jost, sans-serif', fontSize: '0.57rem',
               color: 'rgba(255,255,255,0.18)', fontWeight: 300, letterSpacing: '0.06em',
-            }}>Est. 2007 · RERA Compliant · Trusted by 500+ Clients</p>
+            }}>Est. 2009 · RERA Compliant · Trusted by 500+ Clients</p>
           </div>
         </div>
       </div>
