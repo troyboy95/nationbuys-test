@@ -4,30 +4,42 @@ import { useEffect, useState } from 'react'
 const FLOATING_IMAGES = [
   {
     src: 'https://images.unsplash.com/photo-1600585152915-d208bec867a1?w=800',
-    style: { top: '18%', right: '8%', width: '180px' },
-    mobileStyle: { top: '12%', right: '4%', width: '110px' },
+    // top-right image
+    desktopStyle: { top: '18%', right: '4%', width: '180px' },
+    tabletStyle:  { top: '10%', right: '2%', width: '130px' },
+    mobileStyle:  { top: '8%',  right: '1rem', width: '90px' },
   },
   {
     src: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800',
-    style: { bottom: '18%', right: '12%', width: '220px' },
-    mobileStyle: { bottom: '22%', right: '4%', width: '130px' },
+    // bottom-right image
+    desktopStyle: { bottom: '18%', right: '10%', width: '220px' },
+    tabletStyle:  { bottom: '14%', right: '2%', width: '140px' },
+    mobileStyle:  { bottom: '14%', right: '1rem', width: '100px' },
   },
 ]
+
+type Breakpoint = 'mobile' | 'tablet' | 'desktop'
+
+function getBreakpoint(w: number): Breakpoint {
+  if (w < 600) return 'mobile'
+  if (w < 1100) return 'tablet'
+  return 'desktop'
+}
 
 export default function ContactHero() {
   const [loaded, setLoaded] = useState(false)
   const [mouse, setMouse] = useState({ x: 0, y: 0 })
-  const [isMobile, setIsMobile] = useState(false)
+  const [bp, setBp] = useState<Breakpoint>('desktop')
 
   useEffect(() => {
     setLoaded(true)
 
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
+    const update = () => setBp(getBreakpoint(window.innerWidth))
+    update()
+    window.addEventListener('resize', update)
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (window.innerWidth < 768) return
+      if (window.innerWidth < 600) return
       setMouse({
         x: (e.clientX / window.innerWidth - 0.5) * 12,
         y: (e.clientY / window.innerHeight - 0.5) * 12,
@@ -37,9 +49,20 @@ export default function ContactHero() {
     window.addEventListener('mousemove', handleMouseMove)
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('resize', checkMobile)
+      window.removeEventListener('resize', update)
     }
   }, [])
+
+  const isMobile  = bp === 'mobile'
+  const isTablet  = bp === 'tablet'
+  const isDesktop = bp === 'desktop'
+
+  // Content area max-width shrinks on tablet so it never overlaps the images
+  const contentMaxWidth = isDesktop ? '560px' : isTablet ? '420px' : '100%'
+  const contentPadding  = isMobile ? '0 1.5rem' : isTablet ? '0 3rem' : '0 6rem'
+
+  // Image height by breakpoint
+  const imgHeight = isDesktop ? '240px' : isTablet ? '160px' : '120px'
 
   return (
     <section
@@ -68,13 +91,13 @@ export default function ContactHero() {
         }}
       />
 
-      {/* Overlays */}
+      {/* Gradient overlays */}
       <div style={{
         position: 'absolute',
         inset: 0,
         background: isMobile
-          ? 'linear-gradient(to bottom, rgba(0,0,0,0.75), rgba(0,0,0,0.6))'
-          : 'linear-gradient(to right, rgba(0,0,0,0.92), rgba(0,0,0,0.7), rgba(0,0,0,0.3))',
+          ? 'linear-gradient(to bottom, rgba(0,0,0,0.78), rgba(0,0,0,0.65))'
+          : 'linear-gradient(to right, rgba(0,0,0,0.95), rgba(0,0,0,0.75), rgba(0,0,0,0.25))',
       }} />
       <div style={{
         position: 'absolute',
@@ -82,21 +105,23 @@ export default function ContactHero() {
         background: 'linear-gradient(to top, rgba(0,0,0,0.95), transparent 60%)',
       }} />
 
-      {/* Floating Frames — hidden on very small screens */}
-      {!isMobile && FLOATING_IMAGES.map((img, i) => {
-        const depth = (i + 1) * 0.5
-        const currentStyle = isMobile ? img.mobileStyle : img.style
+      {/* ─── Floating Frames ─────────────────────────────────────── */}
+      {FLOATING_IMAGES.map((img, i) => {
+        const depth       = (i + 1) * 0.5
+        const frameStyle  = isDesktop ? img.desktopStyle
+                          : isTablet  ? img.tabletStyle
+                          : img.mobileStyle
 
         return (
           <div
             key={i}
             style={{
               position: 'absolute',
-              ...currentStyle,
+              ...frameStyle,
               transform: `translate(${mouse.x * depth}px, ${mouse.y * depth}px)`,
               transition: 'transform 0.2s ease-out',
               zIndex: 2,
-              opacity: 0.9,
+              opacity: isMobile ? 0.6 : 0.9,
             }}
           >
             <div
@@ -113,10 +138,11 @@ export default function ContactHero() {
                 alt="Property"
                 style={{
                   width: '100%',
-                  height: isMobile ? '140px' : '240px',
+                  height: imgHeight,
                   objectFit: 'cover',
                   borderRadius: '6px',
                   filter: 'brightness(0.9)',
+                  display: 'block',
                 }}
               />
             </div>
@@ -124,7 +150,7 @@ export default function ContactHero() {
         )
       })}
 
-      {/* Content */}
+      {/* ─── Content ─────────────────────────────────────────────── */}
       <div
         style={{
           position: 'relative',
@@ -133,8 +159,9 @@ export default function ContactHero() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          padding: isMobile ? '0 1.5rem' : '0 6rem',
-          maxWidth: isMobile ? '100%' : '1000px',
+          padding: contentPadding,
+          // Key fix: cap width so text never bleeds under the right-side images
+          maxWidth: contentMaxWidth,
         }}
       >
         {/* Eyebrow */}
@@ -148,6 +175,7 @@ export default function ContactHero() {
             width: '30px',
             height: '1px',
             background: 'linear-gradient(90deg,#E2C07A,#C9A84C)',
+            flexShrink: 0,
           }} />
           <span style={{
             fontFamily: 'Jost, sans-serif',
@@ -163,13 +191,17 @@ export default function ContactHero() {
         {/* Heading */}
         <h1 style={{
           fontFamily: 'Cormorant Garamond, serif',
-          fontSize: isMobile ? 'clamp(2.4rem, 10vw, 3.5rem)' : 'clamp(3rem, 6vw, 5.8rem)',
+          fontSize: isMobile
+            ? 'clamp(2.2rem, 9vw, 3rem)'
+            : isTablet
+            ? 'clamp(2.6rem, 5vw, 4rem)'
+            : 'clamp(3rem, 5.5vw, 5.8rem)',
           fontWeight: 300,
           lineHeight: 1.05,
           marginBottom: '1.2rem',
           color: 'rgba(255,255,255,0.95)',
         }}>
-          Let's Discuss
+          Let&apos;s Discuss
           <br />
           <span style={{
             background: 'linear-gradient(135deg,#E2C07A,#C9A84C,#A07830)',
@@ -183,21 +215,19 @@ export default function ContactHero() {
         {/* Description */}
         <p style={{
           fontFamily: 'Jost, sans-serif',
-          fontSize: '0.9rem',
+          fontSize: isMobile ? '0.82rem' : '0.9rem',
           color: 'rgba(255,255,255,0.5)',
-          maxWidth: isMobile ? '100%' : '420px',
+          maxWidth: '420px',
           lineHeight: 1.7,
           marginBottom: '2.5rem',
         }}>
           Connect with our advisory team for exclusive opportunities,
           strategic insights, and premium real estate investments.
         </p>
-
-        
       </div>
 
-      {/* Vertical Tagline — hidden on mobile */}
-      {!isMobile && (
+      {/* Vertical Tagline — desktop only */}
+      {isDesktop && (
         <div style={{
           position: 'absolute',
           right: '2rem',
